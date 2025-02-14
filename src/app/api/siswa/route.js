@@ -5,8 +5,19 @@ export async function GET() {
     const siswa = await prisma.siswa.findMany({
       include: { kelas: true },
     });
-    return Response.json({msg: "Sukses mengambil data siswa", status: 200, data: siswa});
+    return Response.json(siswa);
   } catch (error) {
-    return Response.json({msg: "Gagal mengambil data siswa", status: 500, error: error});
+    return Response.json({ error: "Gagal mengambil data siswa" }, { status: 500 });
   }
+}
+
+export async function POST(request) {
+  const { nama, kelasId } = await request.json();
+  const siswa = await prisma.siswa.create({
+    data: {
+      nama,
+      kelas: { connect: { id: kelasId } },
+    },
+  });
+  return Response.json(siswa);
 }

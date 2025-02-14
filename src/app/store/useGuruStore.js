@@ -1,14 +1,29 @@
+"use client";
+
 import { create } from "zustand";
 
-export const useGuruStore = create((set) => ({
+const useGuruStore = create((set) => ({
   guru: [],
+  selectedGuru: null,
   fetchGuru: async () => {
     try {
-      const res = await fetch("/api/guru");
-      const data = await res.json();
+      const response = await fetch("/api/guru");
+      const data = await response.json();
       set({ guru: data });
     } catch (error) {
-      console.error("Gagal mengambil data guru:", error);
+      console.error("Error fetching guru:", error);
     }
   },
+  fetchGuruDetail: async (id) => {
+    try {
+      const response = await fetch(`/api/guru/${id}`);
+      const data = await response.json();
+      set({ selectedGuru: data });
+    } catch (error) {
+      console.error("Error fetching guru detail:", error);
+      set({ selectedGuru: null });
+    }
+}
 }));
+
+export default useGuruStore;

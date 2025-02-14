@@ -1,21 +1,18 @@
+"use client";
+
 import { create } from "zustand";
 
-export const useSiswaStore = create((set) => ({
+const useSiswaStore = create((set) => ({
   siswa: [],
   fetchSiswa: async () => {
     try {
-      const res = await fetch("/api/kelas");
-      const data = await res.json();
-      const formattedData = data.flatMap((kelas) =>
-        kelas.siswa.map((siswa) => ({
-          id: siswa.id,
-          nama: siswa.nama,
-          kelas: kelas.nama,
-        }))
-      );
-      set({ siswa: formattedData });
+      const response = await fetch("/api/siswa");
+      const data = await response.json();
+      set({ siswa: data });
     } catch (error) {
-      console.error("Gagal mengambil data siswa:", error);
+      console.error("Error fetching siswa:", error);
     }
   },
 }));
+
+export default useSiswaStore;

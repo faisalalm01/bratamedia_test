@@ -19,9 +19,19 @@ export async function GET() {
       })),
     }));
 
+    console.log(formattedMataPelajaran);
+    
     return Response.json(formattedMataPelajaran);
   } catch (error) {
     console.error("Error:", error);
     return Response.json({ error: "Gagal mengambil data mata pelajaran" }, { status: 500 });
   }
+}
+
+export async function POST(request) {
+  const { nama } = await request.json();
+  const mapel = await prisma.mataPelajaran.create({
+    data: { nama },
+  });
+  return NextResponse.json(mapel);
 }

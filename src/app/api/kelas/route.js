@@ -10,3 +10,12 @@ export async function GET() {
     return Response.json({ error: "Gagal mengambil data kelas" }, { status: 500 });
   }
 }
+
+export async function POST(request) {
+  const { nama } = await request.json();
+  const kelas = await prisma.kelas.create({
+    data: { nama },
+  });
+  return NextResponse.json(kelas);
+}
+
