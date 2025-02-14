@@ -1,8 +1,22 @@
 # intruction
-    - clone repo
-    - install dependencies
-    - create .env file
-    - migrate database
+- clone repo
+- install dependencies
+    ```
+    npm instal
+    ```
+- create .env file
+- migrate database
+    ```
+    npx prisma migrate dev
+    ```
+- push seed data
+    ```
+    npm run seed
+    ```
+- running project
+    ```
+    npm run dev
+    ```
 
 ## information
 - Framework: Next.js 
@@ -10,6 +24,10 @@
 - Database: PostgreSQL dengan Prisma 
 - Authentication: NextAuth.js
 - UI Library (Opsional): Tailwind CSS
+
+login page
+- username: admin
+- password: password123
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
